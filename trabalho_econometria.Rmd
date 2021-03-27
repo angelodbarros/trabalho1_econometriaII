@@ -179,6 +179,7 @@ ArchTest(res8,lags = 12)
 ```
 
 ```{r}
+library(formattable)
 #############################PARTE 4 - PREVISÃO
 ## Teste de acurácia: dentro da amostra (amostra inteira como treino)
 accuracy(mod8)
@@ -196,6 +197,8 @@ mod8.treino=auto.arima(emprego.treino); mod8.treino
 
 fc_mod8.treino <- forecast(mod8.treino, h = 12) ## a partir da série treino, realizar a projeção para 12 períodos para frente
 fc_mod8.treino
+fc_mo8_tabela <- as_tibble(fc_mod8.treino)
+formattable(fc_mo8_tabela)
 par(mfrow=c(1,1)) ## apenas para organizar os gráficos
 plot(fc_mod8.treino, include = 24, showgap = F, main = "Previsão do SARIMA
      (1,0,2)(0,1,1)", xlab = "Período")
@@ -226,6 +229,7 @@ mod5.treino=Arima(emprego.treino, order=c(1,0,2), seasonal=list(order=c(1,1,1), 
 
 fc_mod5.treino <- forecast(mod5.treino, h = 12) ## a partir da série treino, realizar a projeção para 12 períodos para frente
 fc_mod5.treino
+formattable(as_tibble(fc_mod5.treino))
 par(mfrow=c(1,1)) ## apenas para organizar os gráficos
 plot(fc_mod5.treino, include = 24, showgap = F, main = "Previsão do SARIMA
      (1,0,2)(1,1,1)", xlab = "Período")
@@ -255,6 +259,7 @@ mod7.treino=Arima(emprego.treino, order=c(1,0,2), seasonal=list(order=c(2,1,1), 
 
 fc_mod7.treino <- forecast(mod7.treino, h = 12) ## a partir da série treino, realizar a projeção para 12 períodos para frente
 fc_mod7.treino
+formattable(as_tibble(fc_mod7.treino))
 par(mfrow=c(1,1)) ## apenas para organizar os gráficos
 plot(fc_mod7.treino, include = 24, showgap = F, main = "Previsão do SARIMA
      (1,0,2)(2,1,1)", xlab = "Período")
